@@ -12,13 +12,13 @@ const router = express.Router();
 
 // 같은 주소로 post, get 요청 시 코드 간결하게 
 
-router.route('/abc')
-  .get((req, res) => {
-    res.send('GET /abc');
-  })
-  .post((req, res) => {
-    res.send('POST /abc');
-  });
+// router.route('/abc')
+//   .get((req, res) => {
+//     res.send('GET /abc');
+//   })
+//   .post((req, res) => {
+//     res.send('POST /abc');
+//   });
 
   router.get('/', function(req, res, next) {
     res.render('index', { title : 'Express' });
