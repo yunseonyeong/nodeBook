@@ -29,8 +29,11 @@ app.use(session({ // 세션 관리용 미들웨어, 클라이언트에 쿠키를
 app.use('/', indexRouter);
 app.use('/user', userRouter);
 
-app.use((req, res, next) => {
-  res.status(404).send('Not Found');
+app.use((req, res, next) => {   // 익스프레스가 자체적으로 404에러 처리해주기는 하지만, 웬만하면 에러처리 미들웨어랑 연결되는 404응답 미들웨어를 만들어주자. 
+  // ㅋㅋ 근데 이게 왜 에러처리 미들웨어랑 연결임 ,, ? 이해 못했음 ,, error 객체 만들어주고 next(error) 해야 연결되는거 아입니까? 
+  // res.status(404).send('Not Found');
+  const testErr = new Error("테스트 에러임"); // 일케요
+  next(testErr);
 });
 
 app.use((err, req, res, next) => {
