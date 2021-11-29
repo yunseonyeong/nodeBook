@@ -3,7 +3,8 @@ const path = require('path');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 
-const { sequelize } = require('./models');
+const { sequelize } = require('./models');    // models/index.js 에서 export한 db(우리가 만든 User, Comment 모델 정보 담긴) 
+                                              // 익스프레스 앱과 연결하기 위해 require
 
 const app = express();
 app.set('port', process.env.PORT || 3001);
@@ -12,7 +13,7 @@ nunjucks.configure('views', {
   express : app,
   watch : true,
 });
-sequelize.sync({ force: false })
+sequelize.sync({ force: false })              // sync메소드 통해 익스프레스 앱과 MySQL 연결
   .then(() => {
     console.log('데이터베이스 연결 성공');
   })
