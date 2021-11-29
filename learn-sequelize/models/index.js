@@ -3,10 +3,10 @@ const User = require('./user');
 const Comment = require('./comment');
 
 const env = process.env.NODE_ENV || 'development';
-const config = require('../config/config')[env];
+const config = require('../config/config')[env];          // config 파일엔 MySQL정보가 담겨있다. 
 const db = {};      // db객체 선언
 
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+const sequelize = new Sequelize(config.database, config.username, config.password, config);       // MySQL를 연동하기 위해 sequelize 라는 연결객체를 생성한다.
 
 db.sequelize = sequelize;       // db객체의 sequelize 속성에다가, 윗줄에서 생성한 MySQL 연결 객체를 넣어둔다. 재사용 위해서, 
 
