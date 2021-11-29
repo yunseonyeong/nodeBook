@@ -36,5 +36,7 @@ module.exports = class User extends Sequelize.Model {          // User모델을 
         collate: 'utf8_general_ci', //한글설정
       });
   }
-  static associate(db) {}     
+  static associate(db) {
+    db.User.hasMany(db.comment, {foreignKey : 'commenter', sourceKey: 'id'});
+  }     
 };
