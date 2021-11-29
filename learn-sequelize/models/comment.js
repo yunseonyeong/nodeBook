@@ -23,7 +23,9 @@ module.exports = class Comment extends Sequelize.Model {
     });
   }
 
-  static associate(db) {}
+  static associate(db) {
+    db.Comment.belongsTo(db.User, {foreignKey: 'commenter', targetKey: 'id'});
+  }
 };
 
 // 테이블 두개 다 작성했으면 , index.js 에서 이 둘을 연결하자. 
