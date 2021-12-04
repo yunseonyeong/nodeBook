@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 const pageRouter = require('./routes/page');
-const { sequelize } = require('./models');
+const { sequelize } = require('./models');        // models/index.js 에서 만든 db 연결 위해서, 
 
 const app = express();
 app.set('port', process.env.PORT || 8001);
@@ -18,7 +18,7 @@ nunjucks.configure('views', {
   watch: true,
 });
 
-sequelize.sync({ force: false })
+sequelize.sync({ force: false })          // sync 함수로 익스프레스와 모델 연결 완료
   .then(() => {
     console.log('데이터베이스 연결 성공');
   })
