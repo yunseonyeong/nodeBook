@@ -20,5 +20,9 @@ module.exports = class Hashtag extends Sequelize.Model {
     });
   }
 
-  static associate(db) {}
+  static associate(db) {
+    db.Hashtag.belongsToMany(db.Post, { through: 'PostHashtag'});     // Hashtag(N) : Post(M)
+  }
 };
+
+// 이렇게 NodeBird 프로젝트의 Model은 <User, Post, Hashtag, PostHashtag, Follow> 총 5개이다. 
