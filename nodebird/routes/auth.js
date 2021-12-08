@@ -56,4 +56,17 @@ router.get('/logout', isLoggedIn, (req, res) => {       // isLoggedIn 이 true �
   res.redirect('/');              // 따라서, 다시 메인 페이지로 돌아가면 로그인 해제되어 있을 것.
 });
 
+// 카카오 로그인 라우터
+// GET /auth/kakao 로 접근하면 카카오 로그인 전략 과정이 시작된다. 처음에는 카카오 로그인 창으로 리다이렉트 한다.
+router.get('/kakao', passport.authenticate('kakao'));
+
+// 카카오 로그인 창에서 로그인 후, 성공 여부 결과를 GET /auth/kakao/callback 으로 받는다. 
+// 이 라우터에서는 카카오 로그인 전략을 다시 수행한다.
+router.get('/kakao/callback', passport.authenticate('kakao', {
+  failureRedirect: '/',
+}), (req, res) => {
+  res.redirect('/');
+});
+// 로컬 로그인 라우터랑 다르게, 인자로 콜백함수를 안줘도 된다. 내부적으로 req.login 을 호출하기 때문이다. 
+
 module.exports = router;
