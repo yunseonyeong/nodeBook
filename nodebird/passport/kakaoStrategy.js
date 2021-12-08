@@ -5,7 +5,7 @@ const User = require('../models/user');
 
 module.exports = () => {
   passport.use(new KakaoStrategy({
-    cliendID: process.env.KAKAO_ID,           // kakao에서 발급해주는 아이디, 노출되지 않아야 하므로 process.env 로 설정, 나중에 아이디 발급 받아 .env 파일에 넣을거다.
+    clientID: process.env.KAKAO_ID,           // kakao에서 발급해주는 아이디, 노출되지 않아야 하므로 process.env 로 설정, 나중에 아이디 발급 받아 .env 파일에 넣을거다.
     callbackURL: '/auth/kakao/callback',        // kakao로부터 인증 결과를 받을 라우터 주소, 라우터 작성 시에 이 주소를 사용하자
   }, async (accessToken, refreshToken, profile, done) => {
     console.log('kakao profile', profile);
