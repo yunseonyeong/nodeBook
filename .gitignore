@@ -1,3 +1,4 @@
 node_modules
+.env
 learn-sequelize/config/config.json
 nodebird/config/config.json
