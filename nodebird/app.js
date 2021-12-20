@@ -10,6 +10,8 @@ const passport = require('passport');
 dotenv.config();
 const pageRouter = require('./routes/page');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
+const userRouter = require('./routes/user');
 const { sequelize } = require('./models');        // models/index.js 에서 만든 db 연결 위해서, 
 const passportConfig = require('./passport');         // passport/index.js
 const { O_NOATIME } = require('constants');
@@ -34,6 +36,7 @@ sequelize.sync({ force: false })          // sync 함수로 익스프레스와 �
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/img', express.static(path.join(__dirname, 'uploads')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
@@ -52,6 +55,8 @@ app.use(passport.session());            // req 객체에 passport 정보 저장�
 
 app.use('/', pageRouter);
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
+app.user('/user', userRouter);
 
 app.use((req, res, next) => {
   const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
