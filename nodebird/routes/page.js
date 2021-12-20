@@ -1,5 +1,7 @@
 const express = require('express');
 const { isLoggedIn, isNotLoggedIn } = require('./middlewares');
+const { Post, User } = require('../models');
+
 const router = express.Router();
 
 router.use((req, res, next) => {
@@ -8,6 +10,24 @@ router.use((req, res, next) => {
   res.locals.followingCount = 0;
   res.locals.followerIdList = [];
   next();
+});
+
+router.get('/', async (req, res, next) => {
+  try {
+    const posts = await Post.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'nick'],
+      },
+      order : [['createdAt', 'DESC']],
+    });
+    res.render('main', {
+      title: 'NodeBird',
+      twits: posts,
+    });
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 router.get('/profile', isLoggedIn, (req, res) => {
