@@ -1,3 +1,4 @@
+// 팔로잉 기능 라우터
 const express = require('express');
 const { isLoggedIn } = require('./middlewares');
 const User = require('../models/user');
